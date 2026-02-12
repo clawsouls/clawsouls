@@ -58,4 +58,4 @@ Browse all at [clawsouls.ai](https://clawsouls.ai).
 
 ## License
 
-Open source parts: Apache 2.0 — see [LICENSE.md](LICENSE.md)
+Open source parts: Apache 2.0 — see [LICENSE](LICENSE)
