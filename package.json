@@ -1,0 +1,13 @@
+{
+  "name": "clawsouls",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ClawSouls — AI agent persona sharing platform",
+  "author": "ClawSouls <https://clawsouls.ai>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clawsouls/clawsouls.git"
+  },
+  "homepage": "https://clawsouls.ai"
+}
