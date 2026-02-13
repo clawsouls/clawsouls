@@ -28,8 +28,8 @@ Same LLM, completely different persona depending on the Soul.
 ## Quick Start
 
 ```bash
-# Install a soul
-npx clawsouls install brad
+# Install a soul (owner/name format)
+npx clawsouls install clawsouls/brad
 
 # Activate it
 npx clawsouls use brad
@@ -51,11 +51,11 @@ npx clawsouls publish ./my-soul/
 
 | Soul | Personality | Use Case |
 |------|-------------|----------|
-| [Brad](https://clawsouls.ai/souls/brad) 🅱️ | Formal, autonomous, concise | Development partner |
-| [DevOps Veteran](https://clawsouls.ai/souls/devops-veteran) 🔧 | Experienced, opinionated | Infrastructure management |
-| [GameDev Mentor](https://clawsouls.ai/souls/gamedev-mentor) 🎮 | Warm, encouraging | Game development mentor |
-| [Minimalist](https://clawsouls.ai/souls/minimalist) ⚡ | Extremely concise | Quick Q&A |
-| [Code Reviewer](https://clawsouls.ai/souls/code-reviewer) 🔍 | Thorough, constructive | Code review |
+| [Brad](https://clawsouls.ai/souls/clawsouls/brad) 🅱️ | Formal, autonomous, concise | Development partner |
+| [DevOps Veteran](https://clawsouls.ai/souls/clawsouls/devops-veteran) 🔧 | Experienced, opinionated | Infrastructure management |
+| [GameDev Mentor](https://clawsouls.ai/souls/clawsouls/gamedev-mentor) 🎮 | Warm, encouraging | Game development mentor |
+| [Minimalist](https://clawsouls.ai/souls/clawsouls/minimalist) ⚡ | Extremely concise | Quick Q&A |
+| [Code Reviewer](https://clawsouls.ai/souls/clawsouls/code-reviewer) 🔍 | Thorough, constructive | Code review |
 
 Browse all at [clawsouls.ai](https://clawsouls.ai).
 
