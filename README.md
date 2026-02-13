@@ -37,6 +37,16 @@ npx clawsouls use brad
 # Restart your OpenClaw session — done!
 ```
 
+## Create Your Own
+
+```bash
+# Scaffold a new soul
+npx clawsouls init my-soul
+
+# Edit the files, then publish
+npx clawsouls publish ./my-soul/
+```
+
 ## Sample Souls
 
 | Soul | Personality | Use Case |
