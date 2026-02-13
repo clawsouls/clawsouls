@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f1a"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="soul" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4fc3f7"/>
+      <stop offset="50%" style="stop-color:#7c4dff"/>
+      <stop offset="100%" style="stop-color:#b388ff"/>
+    </linearGradient>
+    <filter id="soulGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="256" cy="256" r="256" fill="url(#bg)"/>
+  
+  <!-- Soul aura -->
+  <ellipse cx="256" cy="225" rx="100" ry="95" fill="none" stroke="url(#soul)" stroke-width="2" opacity="0.2" filter="url(#soulGlow)"/>
+  
+  <g transform="translate(256,230)">
+    <!-- Tail fan (cute rounded) -->
+    <ellipse cx="-12" cy="88" rx="10" ry="8" fill="#e55039" opacity="0.8" transform="rotate(-20,0,85)"/>
+    <ellipse cx="0" cy="92" rx="10" ry="9" fill="#e55039" opacity="0.8"/>
+    <ellipse cx="12" cy="88" rx="10" ry="8" fill="#e55039" opacity="0.8" transform="rotate(20,0,85)"/>
+    
+    <!-- Tail segments (chubby) -->
+    <ellipse cx="0" cy="70" rx="20" ry="12" fill="#eb4d4b"/>
+    <ellipse cx="0" cy="52" rx="24" ry="13" fill="#ff6b6b"/>
+    <ellipse cx="0" cy="34" rx="27" ry="14" fill="#ff7675"/>
+    
+    <!-- Body (round and chubby) -->
+    <ellipse cx="0" cy="10" rx="38" ry="28" fill="#ff7675"/>
+    
+    <!-- Head (big and round = cute) -->
+    <ellipse cx="0" cy="-28" rx="42" ry="35" fill="#ff9ff3"/>
+    
+    <!-- Cheek blush -->
+    <ellipse cx="-28" cy="-18" rx="10" ry="7" fill="#ffb8b8" opacity="0.6"/>
+    <ellipse cx="28" cy="-18" rx="10" ry="7" fill="#ffb8b8" opacity="0.6"/>
+    
+    <!-- Eyes (big sparkly anime eyes) -->
+    <circle cx="-16" cy="-32" r="12" fill="white"/>
+    <circle cx="16" cy="-32" r="12" fill="white"/>
+    <circle cx="-14" cy="-34" r="8" fill="#2d3436"/>
+    <circle cx="18" cy="-34" r="8" fill="#2d3436"/>
+    <circle cx="-12" cy="-36" r="3.5" fill="white"/>
+    <circle cx="20" cy="-36" r="3.5" fill="white"/>
+    <circle cx="-16" cy="-31" r="2" fill="white" opacity="0.6"/>
+    <circle cx="16" cy="-31" r="2" fill="white" opacity="0.6"/>
+    
+    <!-- Happy mouth -->
+    <path d="M-8,-16 Q0,-10 8,-16" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round"/>
+    
+    <!-- Antennae (bouncy) -->
+    <path d="M-12,-58 C-20,-80 -35,-90 -40,-82" fill="none" stroke="#ff9ff3" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="-41" cy="-82" r="5" fill="#ff6b6b"/>
+    <path d="M12,-58 C20,-80 35,-90 40,-82" fill="none" stroke="#ff9ff3" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="41" cy="-82" r="5" fill="#ff6b6b"/>
+    
+    <!-- Left claw arm (stubby cute) -->
+    <path d="M-35,-5 C-55,-10 -65,-20 -72,-28" fill="none" stroke="#ff7675" stroke-width="12" stroke-linecap="round"/>
+    <!-- Left pincer (rounded) -->
+    <ellipse cx="-82" cy="-40" rx="16" ry="12" fill="#ff6b6b" transform="rotate(-30,-82,-40)"/>
+    <ellipse cx="-78" cy="-48" rx="12" ry="8" fill="#ff9ff3" transform="rotate(-40,-78,-48)"/>
+    <ellipse cx="-86" cy="-36" rx="12" ry="8" fill="#ff9ff3" transform="rotate(-20,-86,-36)"/>
+    
+    <!-- Right claw arm (stubby cute) -->
+    <path d="M35,-5 C55,-10 65,-20 72,-28" fill="none" stroke="#ff7675" stroke-width="12" stroke-linecap="round"/>
+    <!-- Right pincer (rounded) -->
+    <ellipse cx="82" cy="-40" rx="16" ry="12" fill="#ff6b6b" transform="rotate(30,82,-40)"/>
+    <ellipse cx="78" cy="-48" rx="12" ry="8" fill="#ff9ff3" transform="rotate(40,78,-48)"/>
+    <ellipse cx="86" cy="-36" rx="12" ry="8" fill="#ff9ff3" transform="rotate(20,86,-36)"/>
+    
+    <!-- Tiny legs -->
+    <line x1="-30" y1="10" x2="-42" y2="22" stroke="#ff7675" stroke-width="4" stroke-linecap="round"/>
+    <line x1="-27" y1="20" x2="-38" y2="34" stroke="#ff7675" stroke-width="4" stroke-linecap="round"/>
+    <line x1="30" y1="10" x2="42" y2="22" stroke="#ff7675" stroke-width="4" stroke-linecap="round"/>
+    <line x1="27" y1="20" x2="38" y2="34" stroke="#ff7675" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Soul orb floating above head -->
+    <circle cx="0" cy="-78" r="14" fill="url(#soul)" opacity="0.7" filter="url(#soulGlow)"/>
+    <circle cx="0" cy="-78" r="7" fill="white" opacity="0.6"/>
+    <circle cx="0" cy="-78" r="3" fill="white" opacity="0.95"/>
+    
+    <!-- Sparkles around soul -->
+    <circle cx="-20" cy="-85" r="2" fill="#b388ff" opacity="0.8"/>
+    <circle cx="18" cy="-90" r="1.5" fill="#4fc3f7" opacity="0.8"/>
+    <circle cx="22" cy="-72" r="2" fill="#b388ff" opacity="0.6"/>
+    <circle cx="-18" cy="-70" r="1.5" fill="#4fc3f7" opacity="0.7"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="256" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="42" fill="white" letter-spacing="3">CLAWSOULS</text>
+</svg>

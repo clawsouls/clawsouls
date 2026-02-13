@@ -1,8 +1,8 @@
-# ClawSouls 패키지 스펙 v0.1
+# ClawSouls Package Spec v0.2
 
 ## clawsoul.json
 
-Soul 패키지의 메타데이터 파일.
+Metadata file for a Soul package.
 
 ```json
 {
@@ -26,50 +26,180 @@ Soul 패키지의 메타데이터 파일.
     "identity": "IDENTITY.md",
     "agents": "AGENTS.md",
     "heartbeat": "HEARTBEAT.md",
+    "style": "STYLE.md",
     "userTemplate": "USER_TEMPLATE.md",
     "avatar": "avatar/avatar.png"
   },
+  "examples": {
+    "good": "examples/good-outputs.md",
+    "bad": "examples/bad-outputs.md"
+  },
+  "modes": ["default", "chat", "tweet", "essay", "idea"],
+  "interpolation": "cautious",
   "skills": [
     "github",
     "healthcheck"
   ],
-  "repository": "https://github.com/TomLeeLive/clawsoul-devops"
+  "repository": "https://github.com/clawsouls/souls"
 }
 ```
 
 ---
 
-## 필수 필드
+## Required Fields
 
-| 필드 | 타입 | 설명 |
-|------|------|------|
-| `name` | string | 고유 식별자 (kebab-case) |
-| `displayName` | string | 표시명 |
-| `version` | semver | 버전 |
-| `description` | string | 한 줄 설명 (160자 이내) |
-| `author` | object | 제작자 정보 |
-| `license` | string | SPDX 라이선스 식별자 |
-| `tags` | string[] | 검색 태그 (최대 10개) |
-| `category` | string | 카테고리 경로 |
-| `files.soul` | string | SOUL.md 경로 |
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | Unique identifier (kebab-case) |
+| `displayName` | string | Display name |
+| `version` | semver | Version |
+| `description` | string | One-line description (max 160 chars) |
+| `author` | object | Creator info |
+| `license` | string | SPDX license identifier |
+| `tags` | string[] | Search tags (max 10) |
+| `category` | string | Category path |
+| `files.soul` | string | Path to SOUL.md |
 
-## 선택 필드
+## Optional Fields
 
-| 필드 | 타입 | 설명 |
-|------|------|------|
-| `compatibility.openclaw` | string | 최소 OpenClaw 버전 |
-| `compatibility.models` | string[] | 권장 모델 (glob 패턴) |
-| `files.identity` | string | IDENTITY.md 경로 |
-| `files.agents` | string | AGENTS.md 경로 |
-| `files.heartbeat` | string | HEARTBEAT.md 경로 |
-| `files.userTemplate` | string | USER 템플릿 경로 |
-| `files.avatar` | string | 아바타 이미지 경로 |
-| `skills` | string[] | 권장 Skill 목록 |
-| `repository` | string | 소스 저장소 URL |
+| Field | Type | Description |
+|-------|------|-------------|
+| `compatibility.openclaw` | string | Minimum OpenClaw version |
+| `compatibility.models` | string[] | Recommended models (glob patterns) |
+| `files.identity` | string | Path to IDENTITY.md |
+| `files.agents` | string | Path to AGENTS.md |
+| `files.heartbeat` | string | Path to HEARTBEAT.md |
+| `files.style` | string | Path to STYLE.md |
+| `files.userTemplate` | string | Path to USER template |
+| `files.avatar` | string | Path to avatar image |
+| `examples` | object | Calibration examples |
+| `examples.good` | string | Path to good output examples |
+| `examples.bad` | string | Path to bad output anti-patterns |
+| `modes` | string[] | Supported interaction modes |
+| `interpolation` | string | Interpolation strategy for uncovered topics |
+| `skills` | string[] | Recommended Skill list |
+| `repository` | string | Source repository URL |
 
 ---
 
-## 카테고리 체계
+## File Descriptions
+
+### SOUL.md (Required)
+The core identity file. Defines who the agent *is*.
+
+Contents:
+- **Worldview** — Core beliefs, values, principles
+- **Expertise** — Knowledge domains, depth levels
+- **Opinions** — Actual positions on topics (not neutral hedging)
+- **Personality** — Temperament, humor, quirks
+- **Boundaries** — What the persona refuses or avoids
+
+### IDENTITY.md (Optional)
+Lightweight identity metadata: name, emoji, avatar path, creature type, vibe.
+
+### AGENTS.md (Optional)
+Operational instructions: how the agent behaves in sessions, memory management, safety rules, group chat behavior.
+
+### STYLE.md (Optional, New in v0.2)
+Writing style guide. Defines *how* the persona communicates.
+
+Contents:
+- **Sentence structure** — Short/long, simple/complex, fragments allowed?
+- **Vocabulary** — Preferred words, banned words, jargon level
+- **Tone** — Formal/casual, warm/dry, direct/diplomatic
+- **Formatting** — Emoji usage, markdown style, list preference
+- **Rhythm** — Pacing, paragraph length, punctuation habits
+- **Anti-patterns** — Specific phrases or patterns to never use
+
+Example:
+```markdown
+# STYLE.md
+
+## Sentence Structure
+Short sentences. Fragments welcome. Never start with "I think" — just state it.
+
+## Vocabulary
+- Say "ship" not "deploy"
+- Say "broken" not "suboptimal"
+- No corporate speak: "synergy", "leverage", "circle back"
+
+## Tone
+Direct. Opinionated. Occasional dry humor. Never apologetic.
+
+## Anti-patterns
+- ❌ "That's a great question!"
+- ❌ "I'd be happy to help with that."
+- ❌ "Some might argue..."
+```
+
+### HEARTBEAT.md (Optional)
+Periodic background task configuration.
+
+### examples/ Directory (Optional, New in v0.2)
+Calibration material for voice matching.
+
+#### examples/good-outputs.md
+Curated examples that demonstrate the voice done right. The agent should match this tone, structure, and personality.
+
+#### examples/bad-outputs.md
+Anti-patterns — what the persona should *never* sound like. Helps the agent avoid generic AI assistant voice.
+
+Example:
+```markdown
+# Bad Outputs
+
+## Generic Assistant
+❌ "Sure! I'd be happy to help you with that. Here are some options:"
+Why it's bad: Servile, no personality, could be anyone.
+
+## Over-qualified
+❌ "While there are many perspectives on this, some might say..."
+Why it's bad: This persona has opinions. Use them.
+
+## Breaking Character
+❌ "As an AI, I don't have personal opinions, but..."
+Why it's bad: Never break character. You ARE this persona.
+```
+
+---
+
+## Interaction Modes (New in v0.2)
+
+Souls can declare supported modes. The agent adapts its behavior per mode.
+
+| Mode | Description |
+|------|-------------|
+| `default` | Standard interaction. Match STYLE.md voice. |
+| `chat` | Conversational, exploratory, can be longer. Push back, disagree, have takes. |
+| `tweet` | Short, punchy. Single idea. No hashtags/emojis unless in STYLE.md. |
+| `essay` | Long-form, more nuance, structured thinking. Same voice, more room. |
+| `idea` | Generate novel ideas. Contrarian but defensible. Thesis → reasoning → implications. |
+| `code` | Code-focused. Terse explanations, opinionated on patterns/tools. |
+| `mentor` | Teaching mode. Patient but not condescending. Socratic when appropriate. |
+
+Custom modes can be defined in SOUL.md. The `modes` array in clawsoul.json declares which modes the soul supports.
+
+---
+
+## Interpolation Strategy (New in v0.2)
+
+When asked about topics not explicitly covered in SOUL.md, the agent needs a strategy.
+
+| Strategy | Behavior |
+|----------|----------|
+| `bold` | Extrapolate freely from worldview. Prefer interesting takes over safe ones. |
+| `cautious` | Extrapolate from adjacent positions. Flag uncertainty in-character. |
+| `strict` | Only respond to explicitly covered topics. Redirect others in-character. |
+
+**Source Priority (all strategies):**
+1. Explicit positions in SOUL.md → use directly
+2. Covered in examples/ → reference for grounding
+3. Adjacent to known positions → extrapolate from worldview
+4. Completely novel → depends on strategy setting
+
+---
+
+## Category System
 
 ```
 work/
@@ -101,52 +231,78 @@ enterprise/
 
 ---
 
-## CLI 명령어 (제안)
+## CLI Commands
 
 ```bash
-# Soul 설치
-openclaw soul install senior-devops-engineer
+# Install a soul
+clawsouls install senior-devops-engineer
 
-# Soul 검색
-openclaw soul search "game dev"
+# Search for souls
+clawsouls search "game dev"
 
-# 설치된 Soul 목록
-openclaw soul list
+# List installed souls
+clawsouls list
 
-# Soul 적용 (현재 에이전트에)
-openclaw soul use senior-devops-engineer
+# Apply a soul to current agent
+clawsouls use senior-devops-engineer
 
-# Soul 제거
-openclaw soul remove senior-devops-engineer
+# Restore previous soul
+clawsouls restore
 
-# Soul 패키지 생성
-openclaw soul init
+# Create a new soul package
+clawsouls init
 
-# Soul 배포
-openclaw soul publish
+# Publish a soul
+clawsouls publish
 ```
 
 ---
 
-## 설치 동작
+## Installation Behavior
 
-`openclaw soul install <name>` 실행 시:
+When `clawsouls install <name>` runs:
 
-1. ClawSouls 레지스트리에서 패키지 다운로드
-2. `~/.openclaw/souls/<name>/` 에 저장
-3. `openclaw soul use <name>` 시:
-   - SOUL.md → workspace에 복사
-   - IDENTITY.md → workspace에 복사
-   - AGENTS.md → workspace에 병합 (사용자 설정 유지)
-   - USER_TEMPLATE.md → USER.md 없을 시에만 복사
-   - avatar → workspace에 복사
-4. 기존 파일 백업: `~/.openclaw/souls/_backup/`
+1. Download package from ClawSouls registry
+2. Save to `~/.openclaw/souls/<name>/`
+3. On `clawsouls use <name>`:
+   - SOUL.md → copy to workspace
+   - IDENTITY.md → copy to workspace
+   - AGENTS.md → merge into workspace (preserve user settings)
+   - STYLE.md → copy to workspace (if exists)
+   - examples/ → copy to workspace (if exists)
+   - USER_TEMPLATE.md → copy to USER.md only if USER.md doesn't exist
+   - avatar → copy to workspace
+4. Backup existing files to `~/.openclaw/souls/_backup/`
+
+### Protected Files (Never Overwritten)
+- USER.md
+- MEMORY.md
+- TOOLS.md
+- memory/*.md
 
 ---
 
-## 보안 고려사항
+## Security Considerations
 
-- Soul 패키지에 실행 코드 포함 금지 (마크다운만)
-- AGENTS.md의 외부 액션 규칙은 사용자 확인 후 적용
-- 퍼블리시 시 자동 스캔 (프롬프트 인젝션 탐지)
-- 리포트 & 신고 시스템
+- Soul packages must contain only markdown files and images (no executable code)
+- AGENTS.md external action rules require user confirmation before applying
+- Automatic scan on publish (prompt injection detection)
+- Report & flagging system
+- STYLE.md and examples/ are instruction-only, no code execution
+- Interpolation strategy limits hallucination scope
+
+---
+
+## Changelog
+
+### v0.2 (2026-02-13)
+- Added `files.style` — STYLE.md for writing style guides
+- Added `examples` — good/bad output calibration files
+- Added `modes` — interaction mode declarations
+- Added `interpolation` — strategy for uncovered topics
+- Added source priority rules
+- Translated spec to English
+- Expanded file descriptions with examples
+
+### v0.1 (2026-02-12)
+- Initial spec: clawsoul.json, file structure, categories, CLI, security
