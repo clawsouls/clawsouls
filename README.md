@@ -69,3 +69,7 @@ Browse all at [clawsouls.ai](https://clawsouls.ai).
 ## License
 
 Open source parts: Apache 2.0 — see [LICENSE](LICENSE)
+
+## Disclaimer
+
+ClawSouls is an independent community platform. Not affiliated with or endorsed by OpenClaw.
