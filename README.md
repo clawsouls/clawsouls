@@ -63,7 +63,7 @@ Browse all at [clawsouls.ai](https://clawsouls.ai).
 
 - 🌐 [clawsouls.ai](https://clawsouls.ai) — Browse souls
 - 📦 [CLI (npm)](https://www.npmjs.com/package/clawsouls) — Install & manage
-- 📦 [Soul Spec](docs/SOUL_SPEC.md) — Create your own soul
+- 📦 [Soul Spec](docs/soul-spec.md) — Create your own soul
 - 🐙 [GitHub Org](https://github.com/clawsouls) — All repositories
 
 ## License

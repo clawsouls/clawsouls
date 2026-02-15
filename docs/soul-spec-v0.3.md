@@ -1,13 +1,14 @@
 # ClawSouls Package Spec
 
-Latest version: **v0.2** ([SOUL_SPEC_v0.2.md](./SOUL_SPEC_v0.2.md))
+Latest version: **v0.3** ([soul-spec-v0.3.md](./soul-spec-v0.3.md))
 
 ## Version History
 
 | Version | Date | Description |
 |---------|------|-------------|
-| [v0.2](./SOUL_SPEC_v0.2.md) | 2026-02-13 | Add STYLE.md, examples, modes, interpolation |
-| [v0.1](./SOUL_SPEC_v0.1.md) | 2026-02-12 | Initial spec: clawsoul.json, file structure, categories, CLI, security |
+| [v0.3](./soul-spec-v0.3.md) | 2026-02-15 | Rename clawsoul.json → soul.json, SOUL_SPEC → soul-spec, roadmap |
+| [v0.2](./soul-spec-v0.2.md) | 2026-02-13 | Add STYLE.md, examples, modes, interpolation |
+| [v0.1](./soul-spec-v0.1.md) | 2026-02-12 | Initial spec: soul.json, file structure, categories, CLI, security |
 
 ---
 
@@ -23,7 +24,7 @@ Adopt the same layered information architecture used by Anthropic Skills:
 
 | Level | Purpose | Soul Spec |
 |-------|---------|-----------|
-| 1. Quick scan | Minimal metadata for discovery/filtering | `clawsoul.json` (lightweight) |
+| 1. Quick scan | Minimal metadata for discovery/filtering | `soul.json` (lightweight) |
 | 2. Full read | Complete persona definition | SOUL.md body |
 | 3. Deep dive | Extended references and examples | Linked files (STYLE.md, IDENTITY.md, examples/) |
 

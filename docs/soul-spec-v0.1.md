@@ -1,6 +1,6 @@
 # ClawSouls 패키지 스펙 v0.1
 
-## clawsoul.json
+## soul.json
 
 Soul 패키지의 메타데이터 파일.
 

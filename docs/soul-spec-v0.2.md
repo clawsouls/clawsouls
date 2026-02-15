@@ -1,6 +1,6 @@
 # ClawSouls Package Spec v0.2
 
-## clawsoul.json
+## soul.json
 
 Metadata file for a Soul package.
 
@@ -177,7 +177,7 @@ Souls can declare supported modes. The agent adapts its behavior per mode.
 | `code` | Code-focused. Terse explanations, opinionated on patterns/tools. |
 | `mentor` | Teaching mode. Patient but not condescending. Socratic when appropriate. |
 
-Custom modes can be defined in SOUL.md. The `modes` array in clawsoul.json declares which modes the soul supports.
+Custom modes can be defined in SOUL.md. The `modes` array in soul.json declares which modes the soul supports.
 
 ---
 
@@ -305,4 +305,4 @@ When `clawsouls install <name>` runs:
 - Expanded file descriptions with examples
 
 ### v0.1 (2026-02-12)
-- Initial spec: clawsoul.json, file structure, categories, CLI, security
+- Initial spec: soul.json, file structure, categories, CLI, security
