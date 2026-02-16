@@ -29,10 +29,10 @@ Same LLM, completely different persona depending on the Soul.
 
 ```bash
 # Install a soul (owner/name format)
-npx clawsouls install clawsouls/brad
+npx clawsouls install clawsouls/surgical-coder
 
 # Activate it
-npx clawsouls use brad
+npx clawsouls use surgical-coder
 
 # Restart your OpenClaw session — done!
 ```
@@ -51,7 +51,7 @@ npx clawsouls publish ./my-soul/
 
 | Soul | Personality | Use Case |
 |------|-------------|----------|
-| [Brad](https://clawsouls.ai/souls/clawsouls/brad) 🅱️ | Formal, autonomous, concise | Development partner |
+| [Surgical Coder](https://clawsouls.ai/souls/clawsouls/surgical-coder) 🔬 | Karpathy-inspired, precise, minimal | Surgical coding precision |
 | [DevOps Veteran](https://clawsouls.ai/souls/clawsouls/devops-veteran) 🔧 | Experienced, opinionated | Infrastructure management |
 | [GameDev Mentor](https://clawsouls.ai/souls/clawsouls/gamedev-mentor) 🎮 | Warm, encouraging | Game development mentor |
 | [Minimalist](https://clawsouls.ai/souls/clawsouls/minimalist) ⚡ | Extremely concise | Quick Q&A |
