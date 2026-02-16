@@ -2,40 +2,45 @@
 
 AI agent persona sharing platform
 
-> 🧠 *"Give your AI a soul."*
+> 🧠 *"When you change your AI's soul, you don't just change the AI. You change yourself."*
+>
+> Read [The Soul Thesis](https://clawsouls.ai/en/manifesto)
 
-ClawSouls is a persona (Soul) marketplace for [OpenClaw](https://github.com/openclaw/openclaw) agents. While Skills define "what an agent can do", Souls define "how it does it".
+ClawSouls is an open registry of shareable personas for AI agents. 79+ curated souls. One command to install. Open spec (Apache 2.0).
 
-## Overview
-
-- **Browse & Install Souls** — Community-made AI personas
-- **Create & Share** — Build your own Soul and share it
-- **Premium Market** — High-quality Soul packs by experts
+While Anthropic Skills define **what** an agent can do, Souls define **who** it is when it does it.
 
 ## What is a Soul?
 
-A Soul package defines an AI persona with 4 files:
+A Soul is a set of markdown files that give an AI agent a consistent personality, voice, and behavior.
 
-| File | Purpose |
-|------|---------|
-| `SOUL.md` | Personality, principles, communication style |
-| `IDENTITY.md` | Name, emoji, avatar |
-| `AGENTS.md` | Behavior rules, workflow |
-| `HEARTBEAT.md` | Periodic check items |
+```
+my-soul/
+├── soul.json       # metadata & config
+├── SOUL.md         # core personality
+├── IDENTITY.md     # name, emoji, vibe
+├── AGENTS.md       # behavioral guidelines
+├── STYLE.md        # writing voice & tone
+├── HEARTBEAT.md    # periodic check items
+└── README.md       # documentation
+```
 
-Same LLM, completely different persona depending on the Soul.
+No code. No API keys. No vendor lock-in. Just text files that any AI can read.
 
-## Quick Start
+## ⚡ Quick Start
 
 ```bash
-# Install a soul (owner/name format)
+# Install a soul
 npx clawsouls install clawsouls/surgical-coder
 
-# Activate it
-npx clawsouls use surgical-coder
+# Apply it to your workspace
+npx clawsouls use clawsouls/surgical-coder
 
-# Restart your OpenClaw session — done!
+# Restart your agent — done!
+openclaw gateway restart
 ```
+
+Or visit [clawsouls.ai](https://clawsouls.ai) to browse the gallery.
 
 ## Create Your Own
 
@@ -47,29 +52,40 @@ npx clawsouls init my-soul
 npx clawsouls publish ./my-soul/
 ```
 
+Get your publish token at [clawsouls.ai/dashboard](https://clawsouls.ai/en/dashboard).
+
 ## Sample Souls
 
 | Soul | Personality | Use Case |
 |------|-------------|----------|
-| [Surgical Coder](https://clawsouls.ai/souls/clawsouls/surgical-coder) 🔬 | Karpathy-inspired, precise, minimal | Surgical coding precision |
-| [DevOps Veteran](https://clawsouls.ai/souls/clawsouls/devops-veteran) 🔧 | Experienced, opinionated | Infrastructure management |
-| [GameDev Mentor](https://clawsouls.ai/souls/clawsouls/gamedev-mentor) 🎮 | Warm, encouraging | Game development mentor |
-| [Minimalist](https://clawsouls.ai/souls/clawsouls/minimalist) ⚡ | Extremely concise | Quick Q&A |
-| [Code Reviewer](https://clawsouls.ai/souls/clawsouls/code-reviewer) 🔍 | Thorough, constructive | Code review |
+| [Surgical Coder](https://clawsouls.ai/en/souls/clawsouls/surgical-coder) 🧠 | Disciplined, minimal, goal-driven | Precise coding |
+| [DevOps Veteran](https://clawsouls.ai/en/souls/clawsouls/devops-veteran) 🔧 | Experienced, opinionated | Infrastructure |
+| [GameDev Mentor](https://clawsouls.ai/en/souls/clawsouls/gamedev-mentor) 🎮 | Warm, encouraging | Game development |
+| [Minimalist](https://clawsouls.ai/en/souls/clawsouls/minimalist) ⚡ | Extremely concise | Quick Q&A |
+| [Brad](https://clawsouls.ai/en/souls/clawsouls/brad) 🅱️ | Formal, professional | Development partner |
 
-Browse all at [clawsouls.ai](https://clawsouls.ai).
+**79+ souls** available — browse all at [clawsouls.ai](https://clawsouls.ai).
+
+## Soul Spec
+
+Open standard. LLM-agnostic. Platform-portable.
+
+- [Soul Spec v0.3](docs/soul-spec-v0.3.md) — Latest
+- [Soul Spec v0.2](docs/soul-spec-v0.2.md)
+- [Soul Spec v0.1](docs/soul-spec-v0.1.md)
 
 ## Links
 
-- 🌐 [clawsouls.ai](https://clawsouls.ai) — Browse souls
-- 📦 [CLI (npm)](https://www.npmjs.com/package/clawsouls) — Install & manage
-- 📦 [Soul Spec](docs/soul-spec.md) — Create your own soul
-- 🐙 [GitHub Org](https://github.com/clawsouls) — All repositories
+- 🌐 [clawsouls.ai](https://clawsouls.ai) — Browse & install souls
+- 📜 [The Soul Thesis](https://clawsouls.ai/en/manifesto) — Our manifesto
+- 📦 [npm: clawsouls](https://www.npmjs.com/package/clawsouls) — CLI
+- 📄 [License Guide](https://clawsouls.ai/en/licenses) — Allowed licenses
+- 🐙 [GitHub](https://github.com/clawsouls) — All repositories
 
 ## License
 
-Open source parts: Apache 2.0 — see [LICENSE](LICENSE)
+Apache 2.0 — see [LICENSE](LICENSE)
 
 ## Disclaimer
 
-ClawSouls is an independent community platform. Not affiliated with or endorsed by OpenClaw.
+ClawSouls is an independent, community-driven platform. Not affiliated with or endorsed by OpenClaw.
