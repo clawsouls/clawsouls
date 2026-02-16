@@ -175,6 +175,7 @@ Unknown licenses (not in the allowlist, not matching blocked patterns) will prod
 - Renamed `clawsoul.json` → `soul.json`
 - Publish confirmation requirement (CLI + web)
 - Platform license disclaimer in Terms of Service
+- License allowlist enforcement (permissive only)
 
 ### v0.2 (2026-02-13)
 - Added STYLE.md, examples, modes, interpolation, skills

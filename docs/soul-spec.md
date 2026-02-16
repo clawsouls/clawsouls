@@ -6,7 +6,7 @@ Latest version: **v0.3** ([soul-spec-v0.3.md](./soul-spec-v0.3.md))
 
 | Version | Date | Description |
 |---------|------|-------------|
-| [v0.3](./soul-spec-v0.3.md) | 2026-02-16 | Add specVersion field, rename clawsoul.json → soul.json, publish confirmation, license disclaimer |
+| [v0.3](./soul-spec-v0.3.md) | 2026-02-16 | Add specVersion field, rename clawsoul.json → soul.json, publish confirmation, license disclaimer, license allowlist |
 | [v0.2](./soul-spec-v0.2.md) | 2026-02-13 | Add STYLE.md, examples, modes, interpolation |
 | [v0.1](./soul-spec-v0.1.md) | 2026-02-12 | Initial spec: soul.json, file structure, categories, CLI, security |
 
