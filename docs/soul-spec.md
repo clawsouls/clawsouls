@@ -14,7 +14,7 @@ Latest version: **v0.3** ([soul-spec-v0.3.md](./soul-spec-v0.3.md))
 
 ## Roadmap
 
-### v0.3 Planned Features
+### v0.4 Planned Features
 
 Aligned with Anthropic's Skill design patterns ("The Complete Guide to Building Skills for Claude", Jan 2026).
 
