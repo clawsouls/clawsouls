@@ -6,7 +6,7 @@ AI agent persona sharing platform
 >
 > Read [The Soul Thesis](https://clawsouls.ai/en/manifesto)
 
-ClawSouls is an open registry of shareable personas for AI agents. 79+ curated souls. One command to install. Open spec (Apache 2.0).
+ClawSouls is an open-spec platform for shareable AI agent personas. 79+ curated souls. One command to install. Apache 2.0.
 
 While Anthropic Skills define **what** an agent can do, Souls define **who** it is when it does it.
 
