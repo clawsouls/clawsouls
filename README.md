@@ -6,9 +6,29 @@ AI agent persona sharing platform
 >
 > Read [The Soul Thesis](https://clawsouls.ai/en/manifesto)
 
-ClawSouls is an open-spec platform for shareable AI agent personas. 79+ curated souls. One command to install. Apache 2.0.
+ClawSouls is an open-spec platform for shareable AI agent personas. 80+ curated souls. One command to install. Works with any SOUL.md-compatible agent. Apache 2.0.
 
 While Anthropic Skills define **what** an agent can do, Souls define **who** it is when it does it.
+
+## 🤝 Multi-Platform
+
+ClawSouls auto-detects your agent framework — no configuration needed.
+
+| Platform | Directory | Status |
+|----------|-----------|--------|
+| OpenClaw | `~/.openclaw/workspace/` | ✅ Auto-detected |
+| ZeroClaw | `~/.zeroclaw/workspace/` | ✅ Auto-detected |
+| Clawdbot | `~/.clawdbot/workspace/` | ✅ Auto-detected |
+| Moltbot  | `~/.moltbot/workspace/`  | ✅ Auto-detected |
+| Moldbot  | `~/.moldbot/workspace/`  | ✅ Auto-detected |
+| Custom   | Any path                 | ✅ `--workspace` / `--platform` |
+
+```bash
+# Override if needed
+clawsouls --platform zeroclaw use surgical-coder
+clawsouls --workspace ~/my-agent/workspace use surgical-coder
+clawsouls platform   # check detected platform
+```
 
 ## What is a Soul?
 
@@ -70,9 +90,8 @@ Get your publish token at [clawsouls.ai/dashboard](https://clawsouls.ai/en/dashb
 
 Open standard. LLM-agnostic. Platform-portable.
 
-- [Soul Spec v0.3](docs/soul-spec-v0.3.md) — Latest
-- [Soul Spec v0.2](docs/soul-spec-v0.2.md)
-- [Soul Spec v0.1](docs/soul-spec-v0.1.md)
+- [Soul Spec v0.4](docs/soul-spec-v0.4.md) — Latest
+- [Soul Spec v0.3](docs/soul-spec-v0.3.md)
 
 ## Links
 
