@@ -223,6 +223,173 @@ Same as v0.3. See [Soul Spec v0.3 — File Descriptions](./soul-spec-v0.3.md#fil
 
 ---
 
+## Embodied Agents (Robotics / IoT)
+
+Soul Spec extends naturally to embodied agents — robots, IoT devices, and physical AI systems that interact with the real world. The same persona package that defines a chatbot's personality can define a robot's interaction character.
+
+### New Optional Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `environment` | string | Deployment context. Values: `"virtual"` (default), `"embodied"`, `"hybrid"` |
+| `interactionMode` | string | Primary interaction modality. Values: `"text"`, `"voice"`, `"multimodal"`, `"gesture"` |
+| `hardwareConstraints` | object | Physical hardware capabilities and limitations |
+| `safety.physical` | object | Physical safety rules for embodied agents |
+
+### Environment Field
+
+```json
+{
+  "environment": "embodied"
+}
+```
+
+- `"virtual"` — Text/chat-based agent (default, backward compatible)
+- `"embodied"` — Physical robot, kiosk, or IoT device
+- `"hybrid"` — Operates in both virtual and physical contexts
+
+If omitted, defaults to `"virtual"`. Existing souls are unaffected.
+
+### Interaction Mode
+
+```json
+{
+  "interactionMode": "voice"
+}
+```
+
+Declares the primary interaction modality. Useful for:
+- Registry filtering ("show me voice-first souls")
+- Framework adaptation (voice-first = shorter responses, simpler vocabulary)
+- SoulScan validation (voice-first soul shouldn't reference "click here")
+
+### Hardware Constraints
+
+```json
+{
+  "hardwareConstraints": {
+    "hasDisplay": true,
+    "hasSpeaker": true,
+    "hasMicrophone": true,
+    "hasCamera": true,
+    "mobility": "mobile",
+    "manipulator": false
+  }
+}
+```
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `hasDisplay` | boolean | Screen available for visual output |
+| `hasSpeaker` | boolean | Audio output capability |
+| `hasMicrophone` | boolean | Audio input capability |
+| `hasCamera` | boolean | Visual perception capability |
+| `mobility` | string | `"stationary"`, `"mobile"`, `"limited"` |
+| `manipulator` | boolean | Can physically manipulate objects |
+
+**Semantics**: Informational only. Frameworks use these hints to adapt behavior (e.g., skip visual references on a speaker-only device). Not enforced.
+
+### Physical Safety
+
+```json
+{
+  "safety": {
+    "physical": {
+      "contactPolicy": "no-contact",
+      "emergencyProtocol": "alert_operator",
+      "operatingZone": "indoor",
+      "maxSpeed": "0.5m/s"
+    }
+  }
+}
+```
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `contactPolicy` | string | `"no-contact"`, `"gentle-contact"`, `"full-contact"` |
+| `emergencyProtocol` | string | Action on emergency: `"stop"`, `"alert_operator"`, `"return_home"` |
+| `operatingZone` | string | `"indoor"`, `"outdoor"`, `"both"` |
+| `maxSpeed` | string | Maximum movement speed (informational) |
+
+**Rationale**: Physical safety is fundamentally different from prompt injection defense. A robot soul that permits physical contact must declare it explicitly. SoulScan can flag embodied souls without safety declarations.
+
+### Platform Identifiers for Robotics
+
+The `compatibility.frameworks` field now includes robotics platforms:
+
+- `ros2` — Robot Operating System 2
+- `isaac` — NVIDIA Isaac
+- `webots` — Cyberbotics Webots
+- `gazebo` — Open Robotics Gazebo
+
+```json
+{
+  "compatibility": {
+    "frameworks": ["openclaw", "ros2"]
+  }
+}
+```
+
+### Example: Care Companion Robot
+
+```json
+{
+  "specVersion": "0.4",
+  "name": "care-companion",
+  "displayName": "Care Companion",
+  "version": "1.0.0",
+  "description": "Gentle elderly care companion with patience and warmth.",
+  "author": { "name": "RoboticsLab", "github": "robotics-lab" },
+  "license": "Apache-2.0",
+  "tags": ["care", "elderly", "companion", "robot", "embodied"],
+  "category": "robotics/care",
+  "environment": "embodied",
+  "interactionMode": "voice",
+  "hardwareConstraints": {
+    "hasDisplay": true,
+    "hasSpeaker": true,
+    "hasMicrophone": true,
+    "hasCamera": true,
+    "mobility": "mobile",
+    "manipulator": false
+  },
+  "safety": {
+    "physical": {
+      "contactPolicy": "gentle-contact",
+      "emergencyProtocol": "alert_operator",
+      "operatingZone": "indoor",
+      "maxSpeed": "0.3m/s"
+    }
+  },
+  "compatibility": {
+    "frameworks": ["ros2", "openclaw"],
+    "models": ["anthropic/*", "openai/*"]
+  },
+  "files": {
+    "soul": "SOUL.md",
+    "identity": "IDENTITY.md"
+  },
+  "disclosure": {
+    "summary": "Patient, warm elderly care companion for indoor mobile robots."
+  }
+}
+```
+
+### Backward Compatibility
+
+All embodied fields are optional. Existing virtual souls require zero changes. The `environment` field defaults to `"virtual"` when omitted.
+
+### Academic References
+
+This extension is informed by recent research demonstrating that consistent robot personality significantly improves interaction quality and task performance:
+
+- "LLM-based Robot Personality Simulation and Cognitive System" (Nature Scientific Reports, 2025)
+- "Robots with Attitudes: Influence of LLM-Driven Robot Personalities" (arXiv 2512.06910, 2025)
+- "Making Social Robots Adaptable by a Marketplace for Interaction Characters" (Frontiers in Robotics and AI, 2025)
+- "ROS-LLM: A ROS Framework for Embodied AI with Task Feedback" (arXiv 2406.19741, 2024)
+
+---
+
 ## Security Considerations
 
 Same as v0.3, with additions:
@@ -230,12 +397,16 @@ Same as v0.3, with additions:
 - **`allowedTools` cross-validation**: SoulScan checks if declared tools match actual tool usage in persona files.
 - **`recommendedSkills` audit**: Excessive required skills may indicate dependency on specific system access.
 - **Framework spoofing**: `compatibility.frameworks` is self-declared and not verified. Trust but verify via SoulScan.
+- **Embodied safety audit**: SoulScan flags embodied souls (`environment: "embodied"`) that lack `safety.physical` declarations. Physical agents without explicit safety rules are a risk.
+- **Contact policy validation**: Souls with `contactPolicy: "full-contact"` require explicit justification in SOUL.md. SoulScan warns on missing rationale.
 
 ---
 
 ## Changelog
 
-### v0.4 (2026-02-20)
+### v0.4 (2026-02-20, updated 2026-02-24)
+- Added Embodied Agents section (`environment`, `interactionMode`, `hardwareConstraints`, `safety.physical`)
+- Added robotics platform identifiers (`ros2`, `isaac`, `webots`, `gazebo`)
 - Added `compatibility.frameworks` for multi-framework support
 - Added `compatibility.minTokenContext` for token budget hints
 - Added `allowedTools` for tool transparency
