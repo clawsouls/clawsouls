@@ -97,7 +97,7 @@ Open standard. LLM-agnostic. Platform-portable.
 
 - 🌐 [clawsouls.ai](https://clawsouls.ai) — Browse & install souls
 - 📜 [The Soul Thesis](https://clawsouls.ai/en/manifesto) — Our manifesto
-- 📄 [Research Paper](https://doi.org/10.5281/zenodo.18678616) — "Soul-Driven Interaction Design" (Lee, 2026)
+- 📄 [Research Paper](https://doi.org/10.5281/zenodo.18758910) — "Soul-Driven Interaction Design" (Lee, 2026)
 - 📦 [npm: clawsouls](https://www.npmjs.com/package/clawsouls) — CLI
 - 📄 [License Guide](https://clawsouls.ai/en/licenses) — Allowed licenses
 - 🐙 [GitHub](https://github.com/clawsouls) — All repositories
