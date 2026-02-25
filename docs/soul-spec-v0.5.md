@@ -375,6 +375,81 @@ The `compatibility.frameworks` field now includes robotics platforms:
 }
 ```
 
+### Sensor Schema
+
+For detailed hardware description beyond boolean flags, souls can declare sensor capabilities:
+
+```json
+{
+  "sensors": {
+    "lidar": { "type": "2D", "range": "12m", "fov": 360 },
+    "camera": { "type": "RGB-D", "resolution": "1280x720", "fps": 30 },
+    "microphone": { "type": "array", "channels": 4 },
+    "imu": true,
+    "touchSensors": ["chest", "head"]
+  }
+}
+```
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `sensors` | object | Sensor capabilities map |
+| `sensors.[name]` | boolean \| object | `true` for presence-only, object for details |
+| `sensors.[name].type` | string | Sensor variant |
+| `sensors.[name].range` | string | Detection range |
+| `sensors.[name].fov` | number | Field of view in degrees |
+
+**Semantics**: Informational. Helps frameworks and LLMs understand what the robot can perceive, enabling appropriate behavioral adaptation (e.g., don't reference visual cues for a robot without camera).
+
+### Actuator Capabilities
+
+Extends the basic `manipulator: boolean` with structured actuator descriptions:
+
+```json
+{
+  "actuators": {
+    "locomotion": { "type": "differential-drive", "maxSpeed": "1.0m/s" },
+    "arm": { "type": "6DOF", "payload": "2kg", "reach": "0.5m" },
+    "gripper": { "type": "parallel", "force": "10N" },
+    "head": { "dof": 2, "range": { "pan": 180, "tilt": 60 } },
+    "expression": { "type": "LED-matrix", "resolution": "8x8" }
+  }
+}
+```
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `actuators` | object | Actuator capabilities map |
+| `actuators.locomotion` | object | Movement system |
+| `actuators.arm` | object | Manipulator arm specs |
+| `actuators.gripper` | object | End-effector specs |
+| `actuators.head` | object | Head movement (pan/tilt) |
+| `actuators.expression` | object | Facial/emotional display hardware |
+
+**Rationale**: A persona designed for a robot with expressive LED eyes behaves differently than one for a voice-only speaker. Actuator declarations let the LLM adapt behavioral output to physical capabilities.
+
+### ROS2 Integration Pattern
+
+For `ros2` framework compatibility, Soul Spec maps to ROS2 concepts:
+
+```
+soul.json          → ROS2 package manifest (package.xml)
+SOUL.md            → System prompt for LLM node
+IDENTITY.md        → Robot namespace / TF frame identity
+safety.physical    → Safety controller parameters
+sensors            → Sensor topic subscriptions
+actuators          → Action server capabilities
+```
+
+**Recommended ROS2 node structure:**
+```
+/robot_soul_loader       — Reads soul package, configures LLM
+/robot_personality_node  — Publishes personality-aware responses
+/safety_monitor          — Enforces safety.physical constraints
+```
+
+Soul packages can be distributed via both ClawSouls registry and ROS2 package managers. The `soul.json` manifest provides all metadata needed for either ecosystem.
+
 ### Backward Compatibility
 
 All embodied fields are optional. Existing virtual souls require zero changes. The `environment` field defaults to `"virtual"` when omitted.
