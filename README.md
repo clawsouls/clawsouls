@@ -68,6 +68,9 @@ Or visit [clawsouls.ai](https://clawsouls.ai) to browse the gallery.
 # Scaffold a new soul
 npx clawsouls init my-soul
 
+# For robotics/embodied agents, use --spec 0.5
+npx clawsouls init my-robot --spec 0.5
+
 # Edit the files, then publish
 npx clawsouls publish ./my-soul/
 ```
