@@ -89,6 +89,10 @@ Get your publish token at [clawsouls.ai/dashboard](https://clawsouls.ai/en/dashb
 
 **79+ souls** available — browse all at [clawsouls.ai](https://clawsouls.ai).
 
+## ⚠️ Spec Version Compatibility
+
+> **v0.5 souls with `environment: "physical"`** include hardware, sensor, and safety fields intended for embodied agents (robots, IoT). Text-only agents (OpenClaw, ChatGPT, Claude) will safely ignore these fields — but the LLM may still interpret physical descriptions in `SOUL.md` as persona context. If you're using a physical soul with a text agent, set `environment: "virtual"` in `soul.json` or add fallback instructions in `SOUL.md`: *"In text-only environments, omit physical action descriptions."*
+
 ## Soul Spec
 
 Open standard. LLM-agnostic. Platform-portable.
