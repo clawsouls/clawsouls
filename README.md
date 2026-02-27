@@ -97,8 +97,9 @@ Get your publish token at [clawsouls.ai/dashboard](https://clawsouls.ai/en/dashb
 
 Open standard. LLM-agnostic. Platform-portable.
 
-- [Soul Spec v0.4](docs/soul-spec-v0.4.md) — Latest
-- [Soul Spec v0.3](docs/soul-spec-v0.3.md)
+- [Soul Spec v0.5](https://github.com/clawsouls/soulspec/blob/main/soul-spec-v0.5.md) — Latest
+- [Soul Spec v0.4](https://github.com/clawsouls/soulspec/blob/main/soul-spec-v0.4.md)
+- [Soul Spec v0.3](https://github.com/clawsouls/soulspec/blob/main/soul-spec-v0.3.md)
 
 ## Links
 
