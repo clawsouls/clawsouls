@@ -103,6 +103,7 @@ Open standard. LLM-agnostic. Platform-portable.
 
 ## Links
 
+- 📚 [docs.clawsouls.ai](https://docs.clawsouls.ai) — Full documentation
 - 🌐 [clawsouls.ai](https://clawsouls.ai) — Browse & install souls
 - 📜 [The Soul Thesis](https://clawsouls.ai/en/manifesto) — Our manifesto
 - 📄 [Research Paper](https://doi.org/10.5281/zenodo.18758910) — "Soul-Driven Interaction Design" (Lee, 2026)
