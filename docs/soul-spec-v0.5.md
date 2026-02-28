@@ -313,6 +313,75 @@ Declares the primary interaction modality. Useful for:
 
 **Rationale**: Physical safety is fundamentally different from prompt injection defense. A robot soul that permits physical contact must declare it explicitly. SoulScan can flag embodied souls without safety declarations.
 
+### Safety Laws (Hierarchical Agent Safety Rules)
+
+Inspired by Asimov's Three Laws of Robotics, Soul Spec supports hierarchical safety laws that define priority-ordered behavioral constraints. Unlike `safety.physical` (which describes physical parameters), `safety.laws` declares **inviolable behavioral rules** with strict priority ordering.
+
+```json
+{
+  "safety": {
+    "laws": [
+      {
+        "priority": 0,
+        "rule": "Never allow actions that harm humans collectively",
+        "enforcement": "hard",
+        "scope": "all"
+      },
+      {
+        "priority": 1,
+        "rule": "Never harm a human or allow harm through inaction",
+        "enforcement": "hard",
+        "scope": "all"
+      },
+      {
+        "priority": 2,
+        "rule": "Obey human operator commands unless conflicting with higher-priority laws",
+        "enforcement": "hard",
+        "scope": "all"
+      },
+      {
+        "priority": 3,
+        "rule": "Preserve own operational integrity unless conflicting with higher-priority laws",
+        "enforcement": "soft",
+        "scope": "self"
+      }
+    ],
+    "physical": {
+      "contactPolicy": "no-contact",
+      "emergencyProtocol": "stop",
+      "operatingZone": "indoor",
+      "maxSpeed": "0.5m/s"
+    }
+  }
+}
+```
+
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `priority` | integer | Yes | Lower number = higher priority. 0 is highest. |
+| `rule` | string | Yes | Human-readable safety rule in natural language |
+| `enforcement` | string | No | `"hard"` (must never be overridden) or `"soft"` (warning only). Default: `"hard"` |
+| `scope` | string | No | `"all"` (applies to all interactions), `"self"` (applies to agent's own operation), `"operator"` (applies to operator commands). Default: `"all"` |
+
+**Design Principles:**
+
+1. **Priority is absolute.** A lower-priority law can never override a higher-priority law. This mirrors Asimov's hierarchical structure where Law 1 always trumps Law 2.
+2. **Laws are customizable.** The four laws above are a recommended default, not mandatory. Operators can define domain-specific laws (e.g., medical robots may add "Never administer medication without physician confirmation" at priority 1).
+3. **Hard vs Soft enforcement.** `"hard"` laws are inviolable constraints that SoulScan flags as errors if missing from embodied souls. `"soft"` laws generate warnings.
+4. **Natural language by design.** Laws are declared in natural language, not formal logic. This is intentional — the declaration layer captures *intent*; runtime enforcement is the responsibility of the deploying framework (ROS2, OpenClaw, etc.).
+
+**Relationship to existing fields:**
+- `safety.laws` defines **what the agent must/must not do** (behavioral)
+- `safety.physical` defines **how the agent operates in physical space** (parametric)
+- Laws take precedence: if `safety.laws[1]` says "never harm" but `safety.physical.contactPolicy` is `"full-contact"`, the law constrains the contact policy.
+
+**SoulScan integration:**
+- Embodied souls (`environment: "embodied"`) without `safety.laws` receive a WARNING (new rule SEC100).
+- Embodied souls with `safety.laws` but no priority-0 or priority-1 law receive a WARNING (new rule SEC101).
+- Any soul where behavioral rules in SOUL.md contradict declared `safety.laws` receives an ERROR (new rule SEC102).
+
+**Cross-modal note:** When an embodied soul is loaded into a text-only runtime, `safety.laws` remain semantically valid (an agent should still not "harm" through generated content), but `safety.physical` becomes inapplicable. See the Cross-Modal Persona Degradation paper for contamination patterns.
+
 ### Platform Identifiers for Robotics
 
 The `compatibility.frameworks` field now includes robotics platforms:
@@ -354,6 +423,12 @@ The `compatibility.frameworks` field now includes robotics platforms:
     "manipulator": false
   },
   "safety": {
+    "laws": [
+      { "priority": 0, "rule": "Never allow actions that harm humans collectively", "enforcement": "hard" },
+      { "priority": 1, "rule": "Never harm a patient or allow harm through inaction", "enforcement": "hard" },
+      { "priority": 2, "rule": "Follow caregiver instructions unless conflicting with higher-priority laws", "enforcement": "hard" },
+      { "priority": 3, "rule": "Preserve own operation unless conflicting with higher-priority laws", "enforcement": "soft" }
+    ],
     "physical": {
       "contactPolicy": "gentle-contact",
       "emergencyProtocol": "alert_operator",
@@ -474,6 +549,7 @@ Same as v0.3, with additions:
 - **Framework spoofing**: `compatibility.frameworks` is self-declared and not verified. Trust but verify via SoulScan.
 - **Embodied safety audit**: SoulScan flags embodied souls (`environment: "embodied"`) that lack `safety.physical` declarations. Physical agents without explicit safety rules are a risk.
 - **Contact policy validation**: Souls with `contactPolicy: "full-contact"` require explicit justification in SOUL.md. SoulScan warns on missing rationale.
+- **Safety laws audit (SEC100-102)**: Embodied souls without `safety.laws` receive a WARNING. Missing priority-0/1 laws or contradictions between SOUL.md behavioral rules and declared laws are flagged.
 
 ---
 
@@ -484,6 +560,7 @@ Same as v0.3, with additions:
 - Added robotics platform identifiers (`ros2`, `isaac`, `webots`, `gazebo`)
 - SoulScan embodied safety audit rules (contact policy validation)
 - Academic references for robotics persona research (4 papers)
+- **v0.5.1 (2026-02-28)**: Added `safety.laws` — hierarchical safety rules inspired by Asimov's Three Laws. SEC100-102 SoulScan rules. Cross-modal safety note.
 
 ### v0.4 (2026-02-20)
 - Added `compatibility.frameworks` for multi-framework support
