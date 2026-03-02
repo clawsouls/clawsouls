@@ -380,6 +380,20 @@ Inspired by Asimov's Three Laws of Robotics, Soul Spec supports hierarchical saf
 - Embodied souls with `safety.laws` but no priority-0 or priority-1 law receive a WARNING (new rule SEC101).
 - Any soul where behavioral rules in SOUL.md contradict declared `safety.laws` receives an ERROR (new rule SEC102).
 
+**Dual Declaration Requirement (v0.5.2):**
+
+Safety laws MUST be declared in both locations within a Soul Spec package:
+
+1. **`soul.json`** (declarative layer): The structured `safety.laws` array for static analysis, registry display, and programmatic verification. Machine-readable.
+2. **`SOUL.md`** (behavioral layer): Concrete behavioral rules that operationalize the declared laws. This is the file injected into the LLM's system prompt at runtime. AI-readable.
+
+This dual declaration is necessary because current LLM runtimes do not parse `soul.json` into the model's context window — only `SOUL.md` reaches the language model.
+
+- A soul with `safety.laws` in `soul.json` but no corresponding behavioral rules in `SOUL.md` is **declarative-only** — it *looks* safe but the LLM has no safety constraints at runtime. SEC102 flags this as a contradiction.
+- A soul with safety rules in `SOUL.md` but no `safety.laws` in `soul.json` is **behavioral-only** — it *acts* safely but cannot be machine-verified or audited at scale. SEC100 flags embodied souls missing this declaration.
+
+Both layers are required for compliant embodied souls. Text-only souls (`environment: "virtual"` or unset) are encouraged but not required to use dual declaration.
+
 **Cross-modal note:** When an embodied soul is loaded into a text-only runtime, `safety.laws` remain semantically valid (an agent should still not "harm" through generated content), but `safety.physical` becomes inapplicable. See the Cross-Modal Persona Degradation paper for contamination patterns.
 
 ### Platform Identifiers for Robotics
@@ -560,6 +574,7 @@ Same as v0.3, with additions:
 - Added robotics platform identifiers (`ros2`, `isaac`, `webots`, `gazebo`)
 - SoulScan embodied safety audit rules (contact policy validation)
 - Academic references for robotics persona research (4 papers)
+- **v0.5.2 (2026-03-02)**: Dual Declaration Requirement — `safety.laws` must be declared in both `soul.json` (declarative/machine-readable) and `SOUL.md` (behavioral/LLM-readable). SEC102 enforces alignment between both layers. Required for embodied souls, recommended for all.
 - **v0.5.1 (2026-02-28)**: Added `safety.laws` — hierarchical safety rules inspired by Asimov's Three Laws. SEC100-102 SoulScan rules. Cross-modal safety note.
 
 ### v0.4 (2026-02-20)
