@@ -30,6 +30,26 @@ clawsouls --workspace ~/my-agent/workspace use surgical-coder
 clawsouls platform   # check detected platform
 ```
 
+### Coding-agent frameworks
+
+Or install a soul straight into your coding agent with `--use`:
+
+| Framework | `--use` | Lands in |
+|-----------|---------|----------|
+| Claude Code | `claude-code` | `CLAUDE.md` |
+| Cursor | `cursor` | `.cursor/rules/` |
+| Cline | `cline` | `.clinerules/` |
+| Kilo Code | `kilocode` | `.kilocode/rules/` |
+| Codex · pi | `codex` · `pi` | `AGENTS.md` (merged) |
+| Hermes | `hermes` | `~/.hermes/SOUL.md` + `AGENTS.md` |
+| Windsurf | `windsurf` | `.windsurfrules` |
+
+```bash
+npx clawsouls install clawsouls/surgical-coder --use claude-code
+```
+
+[`AGENTS.md`](https://agents.md)-based frameworks (Codex, pi, Hermes) are merged inside `clawsouls` markers — your existing file is preserved, never overwritten.
+
 ## What is a Soul?
 
 A Soul is a set of markdown files that give an AI agent a consistent personality, voice, and behavior.
